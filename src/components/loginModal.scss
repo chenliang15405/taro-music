@@ -1,0 +1,44 @@
+.modal-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgb(0,0,0,0.1);
+    background-attachment: fixed;
+    .main {
+        width: 80%;
+        height: 550px;
+        background-color: #fff;
+        border: 1px solid #fff;
+        margin: 0 auto;
+        border-radius: 10px;
+        animation: modal .5s ease forwards;
+        .title {
+            font-size: 50px;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .input {
+            margin-top: 50px;
+        }
+        .at-input__title {
+            width: 80px;
+        }
+        .btn-group {
+            display: flex;
+            margin: 50px auto;
+            .btn {
+                width: 200px;
+                height: 80px;
+                line-height: 80px;
+            }
+        }
+    }
+}
+
+@keyframes modal {
+    100% {
+        transform: translateY(45%);
+    }
+}

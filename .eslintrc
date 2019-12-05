@@ -1,0 +1,20 @@
+{
+  "extends": ["taro"],
+  "rules": {
+    "no-unused-vars": ["error", { "varsIgnorePattern": "Taro" }],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".tsx"] }],
+    "block-scoped-var": 0,
+    "brace-style": [2, "1tbs", { "allowSingleLine": true }],
+    // 禁止在字符串和注释之外不规则的空白
+    "no-irregular-whitespace": 1,
+    "eqeqeq": [2, "allow-null"]
+  },
+    "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "useJSXTextNode": true,
+    "project": "./tsconfig.json"
+  }
+  }
