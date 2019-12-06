@@ -5,9 +5,10 @@
     flex-direction: column;
     .header {
         padding: 30px;
-        margin-top: 130px;
+        margin-top: 80px;
         display: flex;
         align-items: center;
+        justify-content: space-around;
         border-bottom: 1px solid #666;
         .info-img {
             width: 30%;
@@ -20,12 +21,17 @@
             }
         }
         .info-desc {
+            display: flex;
+            flex-direction: column;
+            margin-right: 30PX;
             .info {
                 display: block;
+                font-size: 20PX;
             }
             .desc {
                 margin-top: 10px;
-                font-size: 20px;
+                font-size: 14PX;
+                color: #666;
             }
         }
         .lgoin-btn {

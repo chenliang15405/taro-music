@@ -1,9 +1,14 @@
 import Taro, { Component, Config } from '@tarojs/taro'
-import Index from './pages/index'
+import Index from './pages/index/Index'
 import 'taro-ui/dist/style/index.scss' // 全局引入一次即可
 import '@tarojs/async-await'
 
+import { Provider } from '@tarojs/redux'
+import configStore from './store'
+
 import './app.scss'
+
+const store = configStore()
 
 // 如果需要在 h5 环境中开启 React Devtools
 // 取消以下注释：
@@ -23,7 +28,7 @@ class App extends Component {
   config: Config = {
     pages: [
       'pages/index/index',
-      'pages/mine/mine',
+      'pages/mine/Mine',
     ],
     window: {
       backgroundTextStyle: 'light',
@@ -40,7 +45,7 @@ class App extends Component {
       }, {
         'iconPath': 'assets/images/latest.png',
         'selectedIconPath': 'assets/images/lastest_on.png',
-        pagePath: 'pages/mine/mine',
+        pagePath: 'pages/mine/Mine',
         text: 'Me'
       }],
       'color': '#000',
@@ -62,7 +67,9 @@ class App extends Component {
   // 请勿修改此函数
   render () {
     return (
-      <Index />
+        <Provider store={store}>
+            <Index />
+        </Provider>
     )
   }
 }

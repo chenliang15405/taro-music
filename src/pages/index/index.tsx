@@ -29,15 +29,6 @@ export default class Index extends Component {
     return (
       <View className='index-container'>
           <Text>Hello wor11111</Text>
-          <View className={'header'}>
-                <View className={'info-img'}>
-                    <Image className={'img'} src={require('../../assets/images/mine.jpg')}/>
-                </View>
-                <View className={'info-desc'}>
-                    <Text>"123"</Text>
-                    <Text>{'这个人还没有简介...'}</Text>
-                </View>
-            </View>
       </View>
     )
   }

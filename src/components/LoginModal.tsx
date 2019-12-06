@@ -1,20 +1,23 @@
-import Taro, { useState } from "@tarojs/taro";
+import Taro, { useState, useRef } from "@tarojs/taro";
 import { View } from "@tarojs/components";
 import { AtInput,AtButton } from "taro-ui";
 import propTypes from 'prop-types'
 import classnames from 'classnames'
 
+import { useDispatch } from '@tarojs/redux'
+import { LOGIN, STORAGE_KEY } from '../constants/user'
 import { IUSERINFO } from '../interfaces/IMine'
 import { toast } from '../utils/toast'
 import { login } from '../api/user'
+import { setStorage } from '../utils/storage'
 import './loginModal.scss'
 
 
 function LoginModal(props) {
     const [userInfo, setUserInfo] = useState<IUSERINFO>({username: "", password: ""})
     const [loading, setLoading] = useState<boolean>(false)
-
-
+    const dispatch = useDispatch()
+    
     const handleChange = (flag: number, event: string) => {
         if(flag === 1){
             // useState不会自动合并对象属性，通过函数来手动合并
@@ -27,7 +30,7 @@ function LoginModal(props) {
             })
         }
     }
-    
+
     // 登录请求
     const loginHandler = async () => {
         // 发送登录请求
@@ -37,6 +40,14 @@ function LoginModal(props) {
         const resp: any = await login(JSON.stringify(data))
         if(resp.status === 200) {
             toast("登录成功", "success")
+            const {username, token, faceImage, nickname, isFollow} = resp.data
+            // 存储到redux中
+            // dispatch({type: LOGIN, payload: {username, token: userToken, faceImage, nickname, isFollow}})
+            dispatch(() => {
+                // 可以在dispatch中进行其他操作，例如class中定义的action，然后操作完成之后再dispath到reducer
+                setStorage(STORAGE_KEY, {username, token, faceImage, nickname, isFollow})
+                dispatch({type: LOGIN, payload: {username, token, faceImage, nickname, isFollow}})
+            })
             props.onCloseModal(false)
         }
         setLoading(false)
@@ -74,10 +85,11 @@ function LoginModal(props) {
                     placeholder="密码不能少于10位数"
                     value={userInfo.password}
                     onChange={(e: any) => handleChange(2, e)}
+                    onBlur={(e) => handleChange(2, e)}
                 />
                 <View className="btn-group">
-                    <AtButton className="btn" loading={loading} type='primary' size='small' onClick={loginHandler}>登录</AtButton>
-                    <AtButton className="btn" type='secondary' size='small' onClick={closeModal}>取消</AtButton>
+                    <AtButton className="btn" loading={loading} type='primary' size='normal' onClick={loginHandler}>登录</AtButton>
+                    <AtButton className="btn" type='secondary' size='normal' onClick={closeModal}>取消</AtButton>
                 </View>
             </View>
         </View>

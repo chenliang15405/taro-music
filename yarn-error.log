@@ -1,8 +1,8 @@
 Arguments: 
-  /usr/local/Cellar/node/11.11.0/bin/node /usr/local/bin/yarn add @tarojs/async-await:1.3.25
+  /usr/local/Cellar/node/11.11.0/bin/node /usr/local/bin/yarn add ~taro-ui/dist/style/components/fab.scss --silent --no-progress
 
 PATH: 
-  /Library/Java/JavaVirtualMachines/jdk1.8.0_171.jdk/Contents/Home/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/MacGPG2/bin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Library/Java/JavaVirtualMachines/jdk1.8.0_171.jdk/Contents/Home/bin:/Users/alan.chen/Downloads/apache-tomcat-7.0.9/bin:.:/Users/alan.chen/Downloads/apache-tomcat-7.0.9/bin:.
+  /usr/local/lib/node_modules/npm/node_modules/npm-lifecycle/node-gyp-bin:/Users/alan.chen/pro_temp/diy-music/node_modules/.bin:/var/folders/k7/793kxd7s0k514cp56brz504m8wx4fb/T/yarn--1575620439876-0.65445905416664:/Users/alan.chen/pro_temp/diy-music/node_modules/.bin:/Users/alan.chen/.config/yarn/link/node_modules/.bin:/Users/alan.chen/pro_temp/diy-music/node_modules/.bin:/Users/alan.chen/.config/yarn/link/node_modules/.bin:/usr/local/Cellar/node/11.11.0/libexec/lib/node_modules/npm/bin/node-gyp-bin:/usr/local/Cellar/node/11.11.0/lib/node_modules/npm/bin/node-gyp-bin:/usr/local/Cellar/node/11.11.0/bin/node_modules/npm/bin/node-gyp-bin:/usr/local/Cellar/node/11.11.0/bin:/Library/Java/JavaVirtualMachines/jdk1.8.0_171.jdk/Contents/Home/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/MacGPG2/bin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Library/Java/JavaVirtualMachines/jdk1.8.0_171.jdk/Contents/Home/bin:/Users/alan.chen/Downloads/apache-tomcat-7.0.9/bin:.:/Users/alan.chen/Downloads/apache-tomcat-7.0.9/bin:.
 
 Yarn version: 
   1.13.0
@@ -14,15 +14,15 @@ Platform:
   darwin x64
 
 Trace: 
-  Error: https://registry.npm.taobao.org/@tarojs%2fasync-await:1.3.25: Not found
+  Error: https://registry.npm.taobao.org/~taro-ui%2fdist/style/components/fab.scss: [not_found] document not found
       at Request.params.callback [as _callback] (/usr/local/lib/node_modules/yarn/lib/cli.js:66255:18)
       at Request.self.callback (/usr/local/lib/node_modules/yarn/lib/cli.js:129397:22)
       at Request.emit (events.js:182:13)
       at Request.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:130369:10)
       at Request.emit (events.js:182:13)
-      at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:130291:12)
+      at Gunzip.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:130291:12)
       at Object.onceWrapper (events.js:273:13)
-      at IncomingMessage.emit (events.js:187:15)
+      at Gunzip.emit (events.js:187:15)
       at endReadableNT (_stream_readable.js:1094:12)
       at process._tickCallback (internal/process/next_tick.js:63:19)
 
@@ -60,6 +60,8 @@ npm manifest:
     "dependencies": {
       "@tarojs/async-await": "^1.3.27",
       "@tarojs/components": "1.3.25",
+      "@tarojs/redux": "^1.3.27",
+      "@tarojs/redux-h5": "^1.3.27",
       "@tarojs/router": "1.3.25",
       "@tarojs/taro": "1.3.25",
       "@tarojs/taro-alipay": "1.3.25",
@@ -72,6 +74,9 @@ npm manifest:
       "classnames": "^2.2.6",
       "nerv-devtools": "^1.5.0",
       "nervjs": "^1.5.0",
+      "redux": "^4.0.4",
+      "redux-logger": "^3.0.6",
+      "redux-thunk": "^2.3.0",
       "taro-ui": "^2.2.4"
     },
     "devDependencies": {
@@ -274,6 +279,24 @@ Lockfile:
     dependencies:
       uglify-js "^3.3.24"
   
+  "@tarojs/redux-h5@^1.3.27":
+    version "1.3.27"
+    resolved "https://registry.npm.taobao.org/@tarojs/redux-h5/download/@tarojs/redux-h5-1.3.27.tgz#afc7abc7c126b733bee41d76edb3d85070308bd2"
+    integrity sha1-r8erx8EmtzO+5B127bPYUHAwi9I=
+    dependencies:
+      hoist-non-react-statics "^2.5.0"
+      invariant "^2.2.4"
+      loose-envify "^1.1.0"
+      prop-types "^15.6.1"
+  
+  "@tarojs/redux@^1.3.27":
+    version "1.3.27"
+    resolved "https://registry.npm.taobao.org/@tarojs/redux/download/@tarojs/redux-1.3.27.tgz#2e389b55833378f2407b463ef7213b3ca6774470"
+    integrity sha1-LjibVYMzePJAe0Y+9yE7PKZ3RHA=
+    dependencies:
+      "@tarojs/taro" "1.3.27"
+      "@tarojs/utils" "1.3.27"
+  
   "@tarojs/router@1.3.25":
     version "1.3.25"
     resolved "https://registry.npm.taobao.org/@tarojs/router/download/@tarojs/router-1.3.25.tgz#101338d9da181dcd53a9db3566faa1dfb2bdda9f"
@@ -364,10 +387,22 @@ Lockfile:
     dependencies:
       "@tarojs/utils" "1.3.25"
   
+  "@tarojs/taro@1.3.27":
+    version "1.3.27"
+    resolved "https://registry.npm.taobao.org/@tarojs/taro/download/@tarojs/taro-1.3.27.tgz#5664841b46aaf0790f5f95d2f598424d2300c6b7"
+    integrity sha1-VmSEG0aq8HkPX5XS9ZhCTSMAxrc=
+    dependencies:
+      "@tarojs/utils" "1.3.27"
+  
   "@tarojs/utils@1.3.25":
     version "1.3.25"
     resolved "https://registry.npm.taobao.org/@tarojs/utils/download/@tarojs/utils-1.3.25.tgz#646698f3bb2babed837447617ccec7bd4ee393e3"
     integrity sha1-ZGaY87srq+2DdEdhfM7HvU7jk+M=
+  
+  "@tarojs/utils@1.3.27":
+    version "1.3.27"
+    resolved "https://registry.npm.taobao.org/@tarojs/utils/download/@tarojs/utils-1.3.27.tgz#49d706afd10825fecec2d8a50414ab4a797fd7b6"
+    integrity sha1-SdcGr9EIJf7OwtilBBSrSnl/17Y=
   
   "@tarojs/webpack-runner@1.3.25":
     version "1.3.25"
@@ -2720,6 +2755,11 @@ Lockfile:
     resolved "https://registry.npm.taobao.org/decode-uri-component/download/decode-uri-component-0.2.0.tgz#eb3913333458775cb84cd1a1fae062106bb87545"
     integrity sha1-6zkTMzRYd1y4TNGh+uBiEGu4dUU=
   
+  deep-diff@^0.3.5:
+    version "0.3.8"
+    resolved "https://registry.npm.taobao.org/deep-diff/download/deep-diff-0.3.8.tgz#c01de63efb0eec9798801d40c7e0dae25b582c84"
+    integrity sha1-wB3mPvsO7JeYgB1Ax+Da4ltYLIQ=
+  
   deep-equal@^1.0.1:
     version "1.1.1"
     resolved "https://registry.npm.taobao.org/deep-equal/download/deep-equal-1.1.1.tgz#b5c98c942ceffaf7cb051e24e1434a25a2e6076a"
@@ -4163,6 +4203,11 @@ Lockfile:
       minimalistic-assert "^1.0.0"
       minimalistic-crypto-utils "^1.0.1"
   
+  hoist-non-react-statics@^2.5.0:
+    version "2.5.5"
+    resolved "https://registry.npm.taobao.org/hoist-non-react-statics/download/hoist-non-react-statics-2.5.5.tgz#c5903cf409c0dfd908f388e619d86b9c1174cb47"
+    integrity sha1-xZA89AnA39kI84jmGdhrnBF0y0c=
+  
   home-or-tmp@^2.0.0:
     version "2.0.0"
     resolved "https://registry.npm.taobao.org/home-or-tmp/download/home-or-tmp-2.0.0.tgz#e36c3f2d2cae7d746a857e38d18d5f32a7882db8"
@@ -4504,7 +4549,7 @@ Lockfile:
     resolved "https://registry.npm.taobao.org/intersection-observer/download/intersection-observer-0.7.0.tgz#ee16bee978db53516ead2f0a8154b09b400bbdc9"
     integrity sha1-7ha+6XjbU1FurS8KgVSwm0ALvck=
   
-  invariant@2.2.4, invariant@^2.2.0, invariant@^2.2.2:
+  invariant@2.2.4, invariant@^2.2.0, invariant@^2.2.2, invariant@^2.2.4:
     version "2.2.4"
     resolved "https://registry.npm.taobao.org/invariant/download/invariant-2.2.4.tgz#610f3c92c9359ce1db616e538008d23ff35158e6"
     integrity sha1-YQ88ksk1nOHbYW5TgAjSP/NRWOY=
@@ -5319,7 +5364,7 @@ Lockfile:
     resolved "https://registry.npm.taobao.org/longest-streak/download/longest-streak-2.0.3.tgz#3de7a3f47ee18e9074ded8575b5c091f5d0a4105"
     integrity sha1-Peej9H7hjpB03thXW1wJH10KQQU=
   
-  loose-envify@^1.0.0, loose-envify@^1.4.0:
+  loose-envify@^1.0.0, loose-envify@^1.1.0, loose-envify@^1.4.0:
     version "1.4.0"
     resolved "https://registry.npm.taobao.org/loose-envify/download/loose-envify-1.4.0.tgz#71ee51fa7be4caec1a63839f7e682d8132d30caf"
     integrity sha1-ce5R+nvkyuwaY4OffmgtgTLTDK8=
@@ -7094,6 +7139,26 @@ Lockfile:
       indent-string "^3.0.0"
       strip-indent "^2.0.0"
   
+  redux-logger@^3.0.6:
+    version "3.0.6"
+    resolved "https://registry.npm.taobao.org/redux-logger/download/redux-logger-3.0.6.tgz#f7555966f3098f3c88604c449cf0baf5778274bf"
+    integrity sha1-91VZZvMJjzyIYExEnPC69XeCdL8=
+    dependencies:
+      deep-diff "^0.3.5"
+  
+  redux-thunk@^2.3.0:
+    version "2.3.0"
+    resolved "https://registry.npm.taobao.org/redux-thunk/download/redux-thunk-2.3.0.tgz#51c2c19a185ed5187aaa9a2d08b666d0d6467622"
+    integrity sha1-UcLBmhhe1Rh6qpotCLZm0NZGdiI=
+  
+  redux@^4.0.4:
+    version "4.0.4"
+    resolved "https://registry.npm.taobao.org/redux/download/redux-4.0.4.tgz#4ee1aeb164b63d6a1bcc57ae4aa0b6e6fa7a3796"
+    integrity sha1-TuGusWS2PWobzFeuSqC25vp6N5Y=
+    dependencies:
+      loose-envify "^1.4.0"
+      symbol-observable "^1.2.0"
+  
   regenerate@^1.2.1:
     version "1.4.0"
     resolved "https://registry.npm.taobao.org/regenerate/download/regenerate-1.4.0.tgz#4a856ec4b56e4077c557589cae85e7a4c8869a11"
@@ -8251,6 +8316,11 @@ Lockfile:
     dependencies:
       dom7 "^2.1.2"
       ssr-window "^1.0.1"
+  
+  symbol-observable@^1.2.0:
+    version "1.2.0"
+    resolved "https://registry.npm.taobao.org/symbol-observable/download/symbol-observable-1.2.0.tgz#c22688aed4eab3cdc2dfeacbb561660560a00804"
+    integrity sha1-wiaIrtTqs83C3+rLtWFmBWCgCAQ=
   
   table@^4.0.1:
     version "4.0.3"

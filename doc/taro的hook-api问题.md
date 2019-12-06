@@ -1,0 +1,5 @@
+1. h5中无法使用useSelector和useDispatch等hook
+2. 无法使用useRef获取元素的值，ref中的current没有value属性
+3. AtInput的输入框在小程序端的onChange事件无法实时获取数据，在移除焦点才会获取到数据，但是由于异步更新state，所以无法获取到数据，解决方案：这是由于微信开发者工具的基础库是2.9.3的原因，修改为2.9.4
+
+4. 使用useEffect的时候， 不要直接在里面设置state的属性，因为useEffect如果没有第二个参数，那么在每次渲染页面都会调用该函数，所以会形成死循环
