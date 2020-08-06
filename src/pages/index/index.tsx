@@ -1,35 +1,94 @@
-import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Text,Image } from '@tarojs/components'
-import './index.scss'
+import Taro, { useState, useEffect } from "@tarojs/taro"
+import { View, Text, Image, Picker, ScrollView } from "@tarojs/components"
+import { useDispatch } from '@tarojs/redux'
 
-export default class Index extends Component {
+import { AtList, AtListItem } from "taro-ui"
 
-  /**
-   * 指定config的类型声明为: Taro.Config
-   *
-   * 由于 typescript 对于 object 类型推导只能推出 Key 的基本类型
-   * 对于像 navigationBarTextStyle: 'black' 这样的推导出的类型是 string
-   * 提示和声明 navigationBarTextStyle: 'black' | 'white' 类型冲突, 需要显示声明类型
-   */
-  config: Config = {
-      navigationBarTitleText: '首页'
-  }
+import { IMUSICLIST, MINFO } from "../../interfaces/IMusic"
+import { getIndexMusicLis } from "../../api/music"
+import { API_BASE_URL } from '../../api/apiConfig'
+import { SET_HOT_LIST } from '../../constants/music'
 
-  componentWillMount () { }
+import './Index.scss'
 
-  componentDidMount () { }
+const Index = () => {
+    function initState(): IMUSICLIST {
+        let musicList: MINFO[] = [
+            { id: "", title: "", desc: "", category: "" }
+        ]
+        let page = 1
+        let totalPages = 1
+        return { musicList, page, totalPages }
+    }
+    const [list, setList] = useState<IMUSICLIST>(initState);
 
-  componentWillUnmount () { }
+    const dispatch = useDispatch()
 
-  componentDidShow () { }
+    useEffect(() => {
+        // 加载首页列表数据
+        const queryList = async () => {
+            const res: any = await getIndexMusicLis(list.page);
+            console.log("index: ", res);
+            const musicList = res.data.rows;
+            const page = res.data.page;
+            const totalPages = res.data.totalPages;
+            setList({ musicList, page, totalPages });
+            // 分发到redux中
+            dispatch({type: SET_HOT_LIST, payload: {musicList, page, totalPages}})
+        };
+        queryList();
+    }, [])
 
-  componentDidHide () { }
+    const onScroll = e => {
+        console.log(e)
+    }
 
-  render () {
+    const MusicInfo = (index: number) => {
+        // 获取索引的对应music数据
+        const musicList = list.musicList
+        const music = musicList[index]
+        console.log(music)
+        const props = JSON.stringify(music)
+        // 传递参数
+        Taro.navigateTo({
+            url: `/pages/music/Music?music=${props}`
+        })
+    }
+
     return (
-      <View className='index-container'>
-          <Text>Hello wor11111</Text>
-      </View>
-    )
-  }
+        <ScrollView
+            className="scrollview"
+            scrollY
+            scrollWithAnimation
+            onScroll={onScroll}
+        >
+            <View className="music-list-container">
+                <AtList>
+                    {
+                        list.musicList.map((item, index) => {
+                            return (
+                                <AtListItem
+                                    key={item.id}
+                                    className='list-item'
+                                    title={item.name}
+                                    note={item.musicDesc}
+                                    arrow="right"
+                                    extraText={`用户: ${item.nickname}`}
+                                    thumb={API_BASE_URL + item.coverPath}
+                                    onClick={() => MusicInfo(index)}
+                                />
+                            )
+                        })
+                    }
+                </AtList>
+            </View>
+        </ScrollView>
+    );
+};
+
+// hook 中设置config
+Index.config = {
+    navigationBarTitleText: "首页"
 }
+
+export default Index

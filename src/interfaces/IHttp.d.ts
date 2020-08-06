@@ -1,6 +1,6 @@
 interface IParams {
     url: string
-    data: string
+    data: string | number
     contentType?: string
 }
 

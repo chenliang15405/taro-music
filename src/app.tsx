@@ -27,8 +27,11 @@ class App extends Component {
    */
   config: Config = {
     pages: [
-      'pages/index/index',
+      // 'pages/music/Music',
+      'pages/index/Index',
+      'pages/diymusic/DiyMusic',
       'pages/mine/Mine',
+      'pages/music/Music'
     ],
     window: {
       backgroundTextStyle: 'light',
@@ -40,7 +43,8 @@ class App extends Component {
       list: [{
         'iconPath': 'assets/images/hotest.png',
         'selectedIconPath': 'assets/images/hotest_on.png',
-        pagePath: 'pages/index/index',
+        pagePath: 'pages/index/Index',
+        // pagePath: 'pages/music/Music',
         text: '首页'
       }, {
         'iconPath': 'assets/images/latest.png',

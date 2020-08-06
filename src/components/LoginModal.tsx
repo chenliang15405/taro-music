@@ -6,7 +6,7 @@ import classnames from 'classnames'
 
 import { useDispatch } from '@tarojs/redux'
 import { LOGIN, STORAGE_KEY } from '../constants/user'
-import { IUSERINFO } from '../interfaces/IMine'
+import { IUSERLOGININFO } from '../interfaces/IMine'
 import { toast } from '../utils/toast'
 import { login } from '../api/user'
 import { setStorage } from '../utils/storage'
@@ -14,7 +14,7 @@ import './loginModal.scss'
 
 
 function LoginModal(props) {
-    const [userInfo, setUserInfo] = useState<IUSERINFO>({username: "", password: ""})
+    const [userInfo, setUserInfo] = useState<IUSERLOGININFO>({username: "", password: ""})
     const [loading, setLoading] = useState<boolean>(false)
     const dispatch = useDispatch()
     
@@ -40,13 +40,13 @@ function LoginModal(props) {
         const resp: any = await login(JSON.stringify(data))
         if(resp.status === 200) {
             toast("登录成功", "success")
-            const {username, token, faceImage, nickname, isFollow} = resp.data
+            const {id, username, token, faceImage, nickname, isFollow} = resp.data
             // 存储到redux中
             // dispatch({type: LOGIN, payload: {username, token: userToken, faceImage, nickname, isFollow}})
             dispatch(() => {
                 // 可以在dispatch中进行其他操作，例如class中定义的action，然后操作完成之后再dispath到reducer
-                setStorage(STORAGE_KEY, {username, token, faceImage, nickname, isFollow})
-                dispatch({type: LOGIN, payload: {username, token, faceImage, nickname, isFollow}})
+                setStorage(STORAGE_KEY, {id, username, token, faceImage, nickname, isFollow})
+                dispatch({type: LOGIN, payload: {id, username, token, faceImage, nickname, isFollow}})
             })
             props.onCloseModal(false)
         }

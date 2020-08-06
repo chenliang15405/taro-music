@@ -1,0 +1,1 @@
+export const SET_HOT_LIST = "getHotList"

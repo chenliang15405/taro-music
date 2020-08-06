@@ -1,9 +1,12 @@
 import { LOGIN, STORAGE_KEY } from '../constants/user'
 import { getStorageSync } from '../utils/storage'
+import { IUSER } from '../interfaces/IMine' 
 
 const cacheUserInfo = getStorageSync(STORAGE_KEY) || {}
 
-const INITIAL_STATE = {
+const INITIAL_STATE: IUSER = {
+    // TODO userId
+    id: cacheUserInfo.id || '',
     username: cacheUserInfo.username || '',
     token: cacheUserInfo.token || '',
     faceImage: cacheUserInfo.faceImage || '',

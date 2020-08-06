@@ -10,14 +10,30 @@ interface IDATALIST {
     image: string
 }
 
-interface IUSERINFO {
+interface IUSERLOGININFO {
     username: string
     password: string
+}
+
+interface IUSER {
+    id: string
+    username: string
+    token: string
+    faceImage: string
+    nickname: string
+    isFollow: string
+    // [propName: string]: any
+}
+
+interface IUSER_SLECTOR_STATE {
+    user: IUSER
 }
 
 
 export {
     INFO,
     IDATALIST,
-    IUSERINFO
+    IUSERLOGININFO,
+    IUSER,
+    IUSER_SLECTOR_STATE
 }

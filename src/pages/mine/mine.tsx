@@ -3,8 +3,9 @@ import { View, Text, Image } from '@tarojs/components'
 import classnames from 'classnames'
 import { AtButton } from 'taro-ui'
 import { useSelector, useDispatch } from '@tarojs/redux'
+import Skeleton from 'taro-skeleton'
 
-import { INFO, IDATALIST } from '../../interfaces/IMine'
+import { INFO, IDATALIST, IUSER_SLECTOR_STATE } from '../../interfaces/IMine'
 
 import LoginModal from '../../components/LoginModal'
 import Creative from '../../components/Creative'
@@ -17,9 +18,10 @@ function Mine() {
     const [dataList, setDataList] = useState<Array<IDATALIST>>([])
     const [isLogin, setIsLogin] = useState(false)
     const [loginModal, setLoginModal] = useState(false)
+    const [loading, setLoading] = useState(true)
 
     // 通过useSelector获取指定counter仓库中的state数据
-    const user = useSelector(state => state.user) 
+    const user = useSelector((state: IUSER_SLECTOR_STATE) => state.user) 
     // 用于获取dispatch方法，和class组件的connect一致
     const dispatch = useDispatch()
 
@@ -48,7 +50,18 @@ function Mine() {
             avatar: user.faceImage,
             desc: ''
         })
+        // 设置user数据记载完毕
+        setTimeout(() => {
+            setLoading(false)
+        }, 1000)
     },[user])
+
+    useEffect(() => {
+        // 设置 列表数据加载完毕
+        setTimeout(() => {
+            setLoading(false)
+        }, 1000)
+    }, [dataList])
 
     const onHandlerLoginModal = (flag: boolean): void => {
         setLoginModal(flag)
@@ -70,39 +83,56 @@ function Mine() {
 
     return (
         <View className={'mine-container'}>
-            <View className={'header'}>
-                <View className={'info-img'}>
-                    <Image className={'img'} src={require('../../assets/images/mine.jpg')}/>
-                </View>
-                {
-                    isLogin ?   
-                        (
-                            <View className='info-desc'>
-                                <Text className={classnames('info', 'name')}>{info.name}</Text>
-                                <Text className={classnames('info', 'desc')}>{info.desc || '这个人还没有简介...'}</Text>
-                            </View>
-                        )
-                        :
-                        (
-                            <View className='lgoin-btn'>
-                                <AtButton type='secondary' size='small' onClick={() => onHandlerLoginModal(true)}>未登录</AtButton>
-                            </View>
-                        )
-                }
-            </View>
-            <View className={'main'}>
-                <View className={'item-list'}>
+            <Skeleton
+                title
+                avatar
+                row={2}
+                loading={loading}
+                rowHeight={30}
+                avatarSize={130}
+                >
+                    <View className={'header'}>
+                    <View className={'info-img'}>
+                        <Image className={'img'} src={require('../../assets/images/mine.jpg')}/>
+                    </View>
                     {
-                        dataList && dataList.map((item, index) => {
-                            return (
-                                <View className={'item'} key={index}>
-                                    <p>{item.name}</p>
+                        isLogin ?   
+                            (
+                                <View className='info-desc'>
+                                    <Text className={classnames('info', 'name')}>{info.name}</Text>
+                                    <Text className={classnames('info', 'desc')}>{info.desc || '这个人还没有简介...'}</Text>
                                 </View>
                             )
-                        })
+                            :
+                            (
+                                <View className='lgoin-btn'>
+                                    <AtButton type='secondary' size='small' onClick={() => onHandlerLoginModal(true)}>未登录</AtButton>
+                                </View>
+                            )
                     }
                 </View>
-            </View>
+            </Skeleton>
+            <Skeleton
+                loading={loading}
+                row={3}
+                rowHeight={50}
+                animate
+                animateName={'elastic'}
+            >
+                <View className={'main'}>
+                    <View className={'item-list'}>
+                        {
+                            dataList && dataList.map((item, index) => {
+                                return (
+                                    <View className={'item'} key={index}>
+                                        <p>{item.name}</p>
+                                    </View>
+                                )
+                            })
+                        }
+                    </View>
+                </View>
+            </Skeleton>
             {   
                 // ts中如果需要向子组件中传递函数，为了不报错，需要在子组件中定义propTypes才可以
                 // 如果指定的事件中需要传递参数，那么需要在触发事件的时候，加上箭头函数指定，否则页面加载的时候就直接触发了

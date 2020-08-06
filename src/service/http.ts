@@ -1,7 +1,8 @@
-import Taro from "@tarojs/taro";
-import getBaseUrl from "./config";
-import interceptors from "./interceptors";
-import {IHttp, IParams} from "../interfaces/IHttp";
+import Taro from "@tarojs/taro"
+import getBaseUrl from "./config"
+import interceptors from "./interceptors"
+import {IHttp, IParams} from "../interfaces/IHttp"
+import { toast } from '../utils/toast'
 
 interceptors.forEach(interceptorItem => Taro.addInterceptor(interceptorItem));
 
@@ -31,10 +32,14 @@ class HttpRequest implements IHttp {
         return Taro.request(option).then(result => {
             Taro.hideLoading()
             return result
+        }).catch(err => {
+            Taro.hideLoading()
+            toast('请求异常')
+            console.log(err)
         });
     }
 
-    get(url: string, data: string = "") {
+    get(url: string, data: string | number = "") {
         let option = { url, data };
         return this.baseOptions(option);
     }

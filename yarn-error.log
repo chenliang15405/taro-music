@@ -1,8 +1,8 @@
 Arguments: 
-  /usr/local/Cellar/node/11.11.0/bin/node /usr/local/bin/yarn add ~taro-ui/dist/style/components/fab.scss --silent --no-progress
+  /usr/local/Cellar/node/11.11.0/bin/node /usr/local/bin/yarn add src/utils/toast --silent --no-progress
 
 PATH: 
-  /usr/local/lib/node_modules/npm/node_modules/npm-lifecycle/node-gyp-bin:/Users/alan.chen/pro_temp/diy-music/node_modules/.bin:/var/folders/k7/793kxd7s0k514cp56brz504m8wx4fb/T/yarn--1575620439876-0.65445905416664:/Users/alan.chen/pro_temp/diy-music/node_modules/.bin:/Users/alan.chen/.config/yarn/link/node_modules/.bin:/Users/alan.chen/pro_temp/diy-music/node_modules/.bin:/Users/alan.chen/.config/yarn/link/node_modules/.bin:/usr/local/Cellar/node/11.11.0/libexec/lib/node_modules/npm/bin/node-gyp-bin:/usr/local/Cellar/node/11.11.0/lib/node_modules/npm/bin/node-gyp-bin:/usr/local/Cellar/node/11.11.0/bin/node_modules/npm/bin/node-gyp-bin:/usr/local/Cellar/node/11.11.0/bin:/Library/Java/JavaVirtualMachines/jdk1.8.0_171.jdk/Contents/Home/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/MacGPG2/bin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Library/Java/JavaVirtualMachines/jdk1.8.0_171.jdk/Contents/Home/bin:/Users/alan.chen/Downloads/apache-tomcat-7.0.9/bin:.:/Users/alan.chen/Downloads/apache-tomcat-7.0.9/bin:.
+  /usr/local/lib/node_modules/npm/node_modules/npm-lifecycle/node-gyp-bin:/Users/alan.chen/pro_temp/diy-music/node_modules/.bin:/var/folders/k7/793kxd7s0k514cp56brz504m8wx4fb/T/yarn--1577240265606-0.7073519201922882:/Users/alan.chen/pro_temp/diy-music/node_modules/.bin:/Users/alan.chen/.config/yarn/link/node_modules/.bin:/Users/alan.chen/pro_temp/diy-music/node_modules/.bin:/Users/alan.chen/.config/yarn/link/node_modules/.bin:/usr/local/Cellar/node/11.11.0/libexec/lib/node_modules/npm/bin/node-gyp-bin:/usr/local/Cellar/node/11.11.0/lib/node_modules/npm/bin/node-gyp-bin:/usr/local/Cellar/node/11.11.0/bin/node_modules/npm/bin/node-gyp-bin:/usr/local/Cellar/node/11.11.0/bin:/Library/Java/JavaVirtualMachines/jdk1.8.0_171.jdk/Contents/Home/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/MacGPG2/bin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Library/Java/JavaVirtualMachines/jdk1.8.0_171.jdk/Contents/Home/bin:/Users/alan.chen/Downloads/apache-tomcat-7.0.9/bin:.:/Users/alan.chen/Downloads/apache-tomcat-7.0.9/bin:.
 
 Yarn version: 
   1.13.0
@@ -14,15 +14,15 @@ Platform:
   darwin x64
 
 Trace: 
-  Error: https://registry.npm.taobao.org/~taro-ui%2fdist/style/components/fab.scss: [not_found] document not found
-      at Request.params.callback [as _callback] (/usr/local/lib/node_modules/yarn/lib/cli.js:66255:18)
+  Error: https://registry.npm.taobao.org/src%2futils/toast: Request "https://registry.npm.taobao.org/src%2futils/toast" returned a 405
+      at Request.params.callback [as _callback] (/usr/local/lib/node_modules/yarn/lib/cli.js:66264:18)
       at Request.self.callback (/usr/local/lib/node_modules/yarn/lib/cli.js:129397:22)
       at Request.emit (events.js:182:13)
       at Request.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:130369:10)
       at Request.emit (events.js:182:13)
-      at Gunzip.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:130291:12)
+      at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:130291:12)
       at Object.onceWrapper (events.js:273:13)
-      at Gunzip.emit (events.js:187:15)
+      at IncomingMessage.emit (events.js:187:15)
       at endReadableNT (_stream_readable.js:1094:12)
       at process._tickCallback (internal/process/next_tick.js:63:19)
 
@@ -74,6 +74,7 @@ npm manifest:
       "classnames": "^2.2.6",
       "nerv-devtools": "^1.5.0",
       "nervjs": "^1.5.0",
+      "react": "^16.12.0",
       "redux": "^4.0.4",
       "redux-logger": "^3.0.6",
       "redux-thunk": "^2.3.0",
@@ -7033,6 +7034,15 @@ Lockfile:
     version "1.0.5"
     resolved "https://registry.npm.taobao.org/react-native-known-styling-properties/download/react-native-known-styling-properties-1.0.5.tgz#dd99690d579c5136541e1df836e75088af6e7356"
     integrity sha1-3ZlpDVecUTZUHh34NudQiK9uc1Y=
+  
+  react@^16.12.0:
+    version "16.12.0"
+    resolved "https://registry.npm.taobao.org/react/download/react-16.12.0.tgz#0c0a9c6a142429e3614834d5a778e18aa78a0b83"
+    integrity sha1-DAqcahQkKeNhSDTVp3jhiqeKC4M=
+    dependencies:
+      loose-envify "^1.1.0"
+      object-assign "^4.1.1"
+      prop-types "^15.6.2"
   
   read-pkg-up@^1.0.1:
     version "1.0.1"

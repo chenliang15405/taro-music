@@ -5,10 +5,10 @@
     flex-direction: column;
     .header {
         padding: 30px;
-        margin-top: 80px;
+        margin-top: 20px;
         display: flex;
         align-items: center;
-        justify-content: space-around;
+        // justify-content: space-around;
         border-bottom: 1px solid #666;
         .info-img {
             width: 30%;
@@ -23,14 +23,14 @@
         .info-desc {
             display: flex;
             flex-direction: column;
-            margin-right: 30PX;
+            margin-left: 35PX;
             .info {
                 display: block;
                 font-size: 20PX;
             }
             .desc {
                 margin-top: 10px;
-                font-size: 14PX;
+                font-size: 12PX;
                 color: #666;
             }
         }
