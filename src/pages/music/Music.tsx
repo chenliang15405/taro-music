@@ -16,8 +16,10 @@ const Music = () => {
     // 在hook中使用useRouter，class中使用this.$router
     const router = useRouter()
 
-    const [musicInfo, setMusicInfo] = useState<MINFO>()
+    const [musicInfo, setMusicInfo] = useState<any>({})
     const [playing, setPlaying] = useState<boolean>(false)
+
+    const musicInfoRef = useRef({});
 
     function initState() {
         return { curretTime: 0, duration: 0, src: '', seek: '', status: '', ended: false, curDraging: false}
@@ -41,6 +43,10 @@ const Music = () => {
         const {music} = router.params
         const params = music && JSON.parse(music)
         setMusicInfo(params)
+        musicInfoRef.current = params;
+        
+        // 初始化audioContext
+        initAudioCtx(params);
     }, [router.params])
 
     // 解决hook中的setState的第二个参数的回调问题
@@ -50,21 +56,23 @@ const Music = () => {
         if(audio.ended) {
             setPlaying(false)
             ifPlayEnded(true)
+        } else {
+            // 在这里进行下一首播放试试
         }
-        // 在这里进行下一首播放试试
     }, [audio.ended])
 
 
-    useEffect(() => {
+    const initAudioCtx = (music: MINFO) => {
+        console.log(music)
         // 初始化audioContext
         const audioCtx = Taro.createInnerAudioContext()
         audioCtx.autoplay = false
         audioCtx.loop = false
-        audioCtx.src = API_BASE_URL + (musicInfo && musicInfo.musicPath)
+        audioCtx.src = API_BASE_URL + (music && music.musicPath)
         audioCtx.onPlay(() => {
-            console.log('开始播放' + playing)
-            setPlaying(true)
-            curretScrollTimer()
+            // console.log('开始播放' + playing)
+            // setPlaying(true)
+            // curretScrollTimer()
         })
         audioCtx.onPause(() => {
             console.log('暂停播放')
@@ -83,15 +91,21 @@ const Music = () => {
         })
         audioCtx.onEnded(() => {
             console.log('自然播放结束')
+            console.log(musicInfo)
             setAudio(preState => {
                 return {...preState, ended: true}
             })
+            clearTimer()
+            nextMusic()
+            console.log('next music')
             // 播放结束，自动下一首
             // TODO 判断是否需要播放
-            setTimeout(() => {
-                nextMusic()
-                playMusic()
-            }, 500)
+            // console.log('11111')
+            // setTimeout(() => {
+            //     console.log('2222')
+            //     nextMusic()
+            //     playMusic()
+            // }, 500)
         })
         audioCtx.onCanplay(() => {
             // 如果不自动播放，则在这里异步获取时长
@@ -107,10 +121,9 @@ const Music = () => {
         audioCtx.onError(() => {
             console.log('error')
         })
-        console.log('audioCtx: ',  audioCtx)
         setAudioCtx(audioCtx)
         setAudio(initState())
-    }, [])
+    }
 
 
     useEffect(()=> {
@@ -122,15 +135,19 @@ const Music = () => {
         }
     }, [])
 
+    useEffect(() => {
+        // setMusicInfo(musicInfo)
+    }, [musicInfo])
 
     const playMusic = () => {
         console.log(musicInfo)
+        console.log('ref', musicInfoRef.current)
         console.log('是否播放：',playing)
         // 播放/暂停
         if(playing) {
             // 暂停x
-            audioCtx.pause()
             clearTimer()
+            audioCtx.pause()
         } else {
             // 播放
             console.log(audioCtx)
@@ -151,10 +168,10 @@ const Music = () => {
                 return;
             }
             // ifPlayEnded(audio.ended)
+            audioCtx.currentTime && moveCurBarByCurrentTime(audioCtx.currentTime, audio.duration)
             console.log('time: ' + audioCtx.currentTime)
-            moveCurBarByCurrentTime(audioCtx.currentTime, audio.duration)
         }, 100)
-        console.log('结束？')
+        console.log('结束？' + timer)
         setCurrentTimer(timer)
     }
 
@@ -238,26 +255,30 @@ const Music = () => {
 
     // 下一首
     const nextMusic = () => {
-        audioCtx.stop()
-        console.log(musicInfo)
+        audioCtx && audioCtx.stop()
+        console.log('current : ', musicInfo)
         const musicList = musicState.musicList
         let index: number = musicInfo && musicList.findIndex(item => {
             return item.id === musicInfo.id
         }) || 0
         console.log(index)
+        console.log(musicList.length)
         // 根据索引获取下一个music
         if(index === -1) {
             return
         }
-        index = index + 1
+        index++
         if (index >= musicList.length) {
             // 获取下一页数据
         } else {
             // 还在第一页中，则直接获取下一首
             const item = musicList[index]
             console.log('下一首', item)
+            musicInfoRef.current = item
             setMusicInfo(item)
+            initAudioCtx(item)
         }
+        playMusic()
     }
 
 

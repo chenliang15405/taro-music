@@ -15,3 +15,9 @@
     ```
 
 2. 通过bind() apply call() 等绑定this指向
+
+
+3. 更新state的问题
+https://blog.csdn.net/qq27229639/article/details/105531459
+-  **通过方法直接传递参数更新参数**
+-  **通过useRef来更新数据**
